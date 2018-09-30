@@ -1,0 +1,46 @@
+signal;
+%apply superspectrogram, and modify display
+scrsz = get(groot,'ScreenSize');
+figure('Name','superspectrogram display: in default conditions','NumberTitle','off','Position',scrsz);
+subplot(1,2,1);
+superspectrogram(x);
+title ('chirp signal');
+subplot(1,2,2);
+superspectrogram(y);
+title ('single freq signal');
+
+scrsz = get(groot,'ScreenSize');
+figure('Name','superspectrogram display: adjust spectrogram limits','NumberTitle','off','Position',scrsz);
+subplot(2,2,1);
+superspectrogram(x);
+title ('default condition');
+subplot(2,2,2);
+superspectrogram(x, 8000,[0 2000], [18 1], @hamming, 1024, [-70 -2]);
+title ('range of [0 2 kHz]');
+subplot(2,2,3);
+superspectrogram(x, 8000,[0 1000], [18 1], @hamming, 1024, [-50 -2]);
+title ('range of [0 1 kHz]');
+subplot(2,2,4);
+superspectrogram(x, 8000,[0 1000], [18 1], @hamming, 1024, [-40 -2]);
+title ('range of [0 1 kHz] with limit [-40dB -2dB]');
+
+scrsz = get(groot,'ScreenSize');
+figure('Name','superspectrogram display: adjust window type','NumberTitle','off','Position',scrsz);
+subplot(3,2,1);
+superspectrogram(x, 8000,[0 1000], [18 1], @hamming, 1024, [-45 -2]);
+title ('hamming window &chirp');
+subplot(3,2,3);
+superspectrogram(x, 8000,[0 1000], [18 1], @hanning, 1024, [-45 -2]);
+title ('hanning window &chirp');
+subplot(3,2,5);
+superspectrogram(x, 8000,[0 1000], [18 1], @blackman, 1024, [-45 -2]);
+title ('blackman window &chirp');
+subplot(3,2,2);
+superspectrogram(y, 8000,[0 1000], [18 1], @hamming, 1024, [-45 -2]);
+title ('hamming window &single freq');
+subplot(3,2,4);
+superspectrogram(y, 8000,[0 1000], [18 1], @hanning, 1024, [-45 -2]);
+title ('hanning window &single freq');
+subplot(3,2,6);
+superspectrogram(y, 8000,[0 1000], [18 1], @blackman, 1024, [-45 -2]);
+title ('blackman window &single freq');
